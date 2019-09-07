@@ -25,23 +25,23 @@ namespace KausarRandomize
                 for (int i = 1; i < 20; i++)
                 {
                     Emotion nextEmotion;
-                    int nextObj;
+                    int nextObject;
                     
                     if (rand.NextDouble() >= 0.5)
                     {
                         // Option 1
                         nextEmotion = seq.Emotion;
-                        nextObj = seq.Object == 1 ? 2 : 1;
+                        nextObject = seq.Object == 1 ? 2 : 1;
                     }
                     else
                     {
                         // Option 2
                         nextEmotion = seq.Emotion == Emotion.Positive ? Emotion.Negative : Emotion.Positive;
-                        nextObj = seq.Object;
+                        nextObject = seq.Object;
                     }
 
                     // Next object
-                    seq = new Sequence { Emotion = nextEmotion, Object = nextObj };
+                    seq = new Sequence { Emotion = nextEmotion, Object = nextObject };
                     trial.Add(seq);
                 }
 
@@ -107,7 +107,7 @@ namespace KausarRandomize
                     counter++;
                     if(counter >= 3)
                     {
-                        // Console.WriteLine($"More than 3 consecutive ");
+                        // Console.WriteLine($"More than 3 consecutive emotions are the same");
                         return false;
                     }
                 }
