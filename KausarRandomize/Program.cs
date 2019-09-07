@@ -19,7 +19,7 @@ namespace KausarRandomize
                 trial = new List<Sequence>();
 
                 // First item
-                var seq = new Sequence { Emotion = Emotion.Positive, Obj = 2 };
+                var seq = new Sequence { Emotion = Emotion.Positive, Object = 2 };
                 trial.Add(seq);
 
                 for (int i = 1; i < 20; i++)
@@ -31,17 +31,17 @@ namespace KausarRandomize
                     {
                         // Option 1
                         nextEmotion = seq.Emotion;
-                        nextObj = seq.Obj == 1 ? 2 : 1;
+                        nextObj = seq.Object == 1 ? 2 : 1;
                     }
                     else
                     {
                         // Option 2
                         nextEmotion = seq.Emotion == Emotion.Positive ? Emotion.Negative : Emotion.Positive;
-                        nextObj = seq.Obj;
+                        nextObj = seq.Object;
                     }
 
                     // Next object
-                    seq = new Sequence { Emotion = nextEmotion, Obj = nextObj };
+                    seq = new Sequence { Emotion = nextEmotion, Object = nextObj };
                     trial.Add(seq);
                 }
 
@@ -62,28 +62,28 @@ namespace KausarRandomize
                 return false;
             }
 
-            var n1 = list.Count(e => e.Emotion == Emotion.Negative && e.Obj == 1);
+            var n1 = list.Count(e => e.Emotion == Emotion.Negative && e.Object == 1);
             if (n1 != 5)
             {
                 // Console.WriteLine($"Wrong count of Negative 1st: {n1}");
                 return false;
             }
 
-            var n2 = list.Count(e => e.Emotion == Emotion.Negative && e.Obj == 2);
+            var n2 = list.Count(e => e.Emotion == Emotion.Negative && e.Object == 2);
             if (n2 != 5)
             {
                 // Console.WriteLine($"Wrong count of Negative 2nd: {n2}");
                 return false;
             }
 
-            var p1 = list.Count(e => e.Emotion == Emotion.Positive && e.Obj == 1);
+            var p1 = list.Count(e => e.Emotion == Emotion.Positive && e.Object == 1);
             if (p1 != 5)
             {
                // Console.WriteLine($"Wrong count of Positive 1st: {p1}");
                 return false;
             }
 
-            var p2 = list.Count(e => e.Emotion == Emotion.Positive && e.Obj == 2);
+            var p2 = list.Count(e => e.Emotion == Emotion.Positive && e.Object == 2);
             if (p2 != 5)
             {
              //   Console.WriteLine($"Wrong count of Positive 2nd: {p2}");
@@ -124,13 +124,15 @@ namespace KausarRandomize
 
     struct Sequence
     {
+        // Positive or Negative
         public Emotion Emotion { get; set; }
 
-        public int Obj { get; set; }
+        // 1st or 2nd
+        public int Object { get; set; }
 
         public override string ToString()
         {
-            string objString = Obj == 1 ? "1st" : "2nd";
+            string objString = Object == 1 ? "1st" : "2nd";
             return $"{Emotion}\t{objString}";
         }
     }
